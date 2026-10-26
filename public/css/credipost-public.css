@@ -1,166 +1,161 @@
 /**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
+ * Credipost Public Styles
+ * Strictly scoped under .credipost-public-wrap
  */
 
-div[rezaid_tagname] {
-    display: none;
+.credipost-public-wrap {
+	margin: 20px 0;
+	font-family: inherit;
 }
 
-p[rezaid_tagname] {
-    display: none;
+.credipost-public-wrap .credipost-card {
+	background: #ffffff;
+	border: 1px solid #e2e4e7;
+	border-radius: 6px;
+	padding: 20px;
+	margin-bottom: 20px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-h1[rezaid_tagname] {
-    display: none;
+.credipost-public-wrap .credipost-input-row {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-top: 12px;
 }
 
-h2[rezaid_tagname] {
-    display: none;
+.credipost-public-wrap .credipost-input {
+	flex: 1 1 300px;
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
 }
 
-h3[rezaid_tagname] {
-    display: none;
+.credipost-public-wrap .credipost-select {
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+	background: #fff;
+	width: 100%;
 }
 
-h4[rezaid_tagname] {
-    display: none;
+.credipost-public-wrap .credipost-btn {
+	padding: 8px 16px;
+	border-radius: 4px;
+	border: 1px solid transparent;
+	font-size: 14px;
+	cursor: pointer;
+	font-weight: 500;
+	transition: background-color 0.15s ease;
 }
 
-h5[rezaid_tagname] {
-    display: none;
+.credipost-public-wrap .credipost-btn-primary {
+	background-color: #2271b1;
+	color: #fff;
 }
 
-h6[rezaid_tagname] {
-    display: none;
+.credipost-public-wrap .credipost-btn-primary:hover {
+	background-color: #135e96;
 }
 
-span[rezaid_tagname] {
-    display: none;
+.credipost-public-wrap .credipost-btn-secondary {
+	background-color: #f0f0f1;
+	color: #2c3338;
+	border-color: #8c8f94;
 }
 
-ul[rezaid_tagname] {
-    display: none;
+.credipost-public-wrap .credipost-btn-secondary:hover {
+	background-color: #dcdcde;
 }
 
-li[rezaid_tagname] {
-    display: none;
+.credipost-public-wrap .credipost-btn-link {
+	background: none;
+	border: none;
+	color: #b32d2e;
+	cursor: pointer;
 }
 
-@media print {
-    body * {
-        visibility: hidden;
-    }
-    #rendered_data,
-    #rendered_data * {
-        visibility: visible;
-    }
-    #rendered_data {
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-    #wpcontent,
-    #wpfooter {
-        padding: 0 !important;
-        width: 100% !important;
-        margin: 0 !important;
-    }
-    hr {
-        width: 96%;
-        color: black;
-        height: 1px;
-    }
+.credipost-public-wrap .credipost-btn-link-white {
+	background: none;
+	border: none;
+	color: #72aee6;
+	cursor: pointer;
+	text-decoration: underline;
 }
 
-.form-control {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+.credipost-public-wrap .credipost-meta-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 16px;
+	margin-bottom: 20px;
 }
 
-.btn {
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+.credipost-public-wrap .credipost-col-wide {
+	grid-column: 1 / -1;
 }
 
-.btn-dark {
-    color: #fff;
-    background-color: #343a40;
-    border-color: #343a40;
+.credipost-public-wrap .credipost-publish-actions {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	padding-top: 14px;
+	border-top: 1px solid #eee;
 }
 
-.btn-warning {
-    color: #212529;
-    background-color: #ffc107;
-    border-color: #ffc107;
+/* Pruning Hover States */
+.credipost-public-wrap .credipost-block {
+	position: relative;
+	padding: 6px 10px;
+	margin: 6px 0;
+	border-radius: 4px;
+	border: 1px dashed transparent;
+	transition: background-color 0.15s ease;
 }
 
-.btn-info {
-    color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
+.credipost-public-wrap .credipost-block:hover {
+	background-color: #fff8e5;
+	border-color: #f0ad4e;
 }
 
-select {
-    word-wrap: normal;
+.credipost-public-wrap .credipost-block .credipost-remove-btn {
+	display: none;
+	position: absolute;
+	top: -8px;
+	right: 4px;
+	background: #d63638;
+	color: #fff;
+	border: none;
+	border-radius: 12px;
+	width: 20px;
+	height: 20px;
+	line-height: 18px;
+	text-align: center;
+	font-size: 14px;
+	cursor: pointer;
 }
 
-.form-control-lg {
-    height: calc(1.5em + 1rem + 2px);
-    padding: .5rem 1rem;
-    /* font-size: 1.25rem; */
-    line-height: 1.5;
-    border-radius: .3rem;
+.credipost-public-wrap .credipost-block:hover > .credipost-remove-btn {
+	display: block;
 }
 
-.hr_hover:hover {
-    background-color: #fbf4bf !important;
-    color: black !important;
+.credipost-public-wrap .credipost-undo-bar {
+	background: #23282d;
+	color: #fff;
+	padding: 8px 14px;
+	border-radius: 4px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 12px;
 }
 
-.icon_class {
-    display: none;
-}
-
-.hr_hover:hover .icon_class {
-    display: inline-block;
-    background-color: #ffc107;
-    margin-right: 0.5em;
-    cursor: pointer;
-}
-
-.btn-danger {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-
-.btn-success {
-    color: #fff;
-    background-color: #28a745;
-    border-color: #28a745;
+.credipost-public-wrap .credipost-notice-box {
+	padding: 10px 14px;
+	border-radius: 4px;
+	margin-bottom: 14px;
+	background: #fcf0f0;
+	border-left: 4px solid #d63638;
 }

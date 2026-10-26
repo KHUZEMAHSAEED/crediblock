@@ -1,108 +1,112 @@
 <?php
-
 /**
  * The public-facing functionality of the plugin.
- *
- * @link       http://rezaid.co.uk
- * @since      1.0.0
  *
  * @package    Credipost
  * @subpackage Credipost/public
  */
 
-/**
- * The public-facing functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the public-facing stylesheet and JavaScript.
- *
- * @package    Credipost
- * @subpackage Credipost/public
- * @author     Rezaid info@rezaid.co.uk
- */
+if ( ! defined( 'ABSPATH' ) && ! defined( 'WPINC' ) ) {
+	exit;
+}
+
 class Credipost_Public {
 
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var string
 	 */
 	private $plugin_name;
 
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var string
 	 */
 	private $version;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param string $plugin_name The name of the plugin.
+	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-
+		$this->version     = $version;
 	}
 
 	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
+	 * Register the public stylesheets and JavaScript ONLY when needed.
 	 */
-	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Plugin_Name_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Plugin_Name_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/credipost-public.css?v='.date('mdY').time(), array(), $this->version, 'all' );
-	}
-
-	/**
-	 * Register the JavaScript for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Plugin_Name_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Plugin_Name_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/credipost-public.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script('jquery', plugin_dir_url( __FILE__ ) .  'js/jquery.js' ,false, NULL, true );
-		wp_register_script( 'main-ajax', plugin_dir_url( __FILE__ ) .  'js/custom.js?v='.date('mdY').time(), array(), '', true );
-		$arr = array(
-				'ajaxurl' => admin_url('admin-ajax.php')
+	public function enqueue_assets() {
+		wp_enqueue_style(
+			$this->plugin_name . '-public',
+			plugin_dir_url( __FILE__ ) . 'css/credipost-public.css',
+			array( 'dashicons' ),
+			$this->version,
+			'all'
 		);
-		wp_localize_script('main-ajax','obj',$arr );
-		wp_enqueue_script('main-ajax');
+
+		// Uses core jQuery - never replaces it!
+		wp_enqueue_script(
+			$this->plugin_name . '-public',
+			plugin_dir_url( __FILE__ ) . 'js/credipost-public.js',
+			array( 'jquery' ),
+			$this->version,
+			true
+		);
+
+		wp_localize_script(
+			$this->plugin_name . '-public',
+			'credipostPublic',
+			array(
+				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+				'nonce'   => wp_create_nonce( 'credipost_admin_nonce' ),
+				'i18n'    => array(
+					'fetching'      => __( 'Fetching content...', 'credipost' ),
+					'saving'        => __( 'Saving post...', 'credipost' ),
+					'postSaved'     => __( 'Post successfully saved!', 'credipost' ),
+					'emptyUrl'      => __( 'Please enter a valid URL.', 'credipost' ),
+					'genericError'  => __( 'An error occurred. Please try again.', 'credipost' ),
+					'removeBlock'   => __( 'Remove block', 'credipost' ),
+					'undo'          => __( 'Undo', 'credipost' ),
+					'noContent'     => __( 'No content found.', 'credipost' ),
+					'embedNotFound' => __( 'Could not embed video URL.', 'credipost' ),
+				),
+			)
+		);
 	}
 
+	/**
+	 * Render the [CREDIPOST] shortcode.
+	 *
+	 * @param array $atts Shortcode attributes.
+	 * @return string Rendered HTML.
+	 */
+	public function render_shortcode( $atts ) {
+		// Only users who can edit posts should be able to curate/publish posts.
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return '<p class="credipost-auth-notice">' . esc_html__( 'You must be logged in with author permissions to use Credipost.', 'credipost' ) . '</p>';
+		}
+
+		// Enqueue assets dynamically when shortcode is rendered.
+		$this->enqueue_assets();
+
+		$categories = get_categories( array(
+			'orderby'    => 'name',
+			'order'      => 'ASC',
+			'hide_empty' => false,
+		) );
+
+		$sites = array();
+		if ( is_multisite() ) {
+			$sites = get_sites( array( 'number' => 100 ) );
+		}
+
+		ob_start();
+		include plugin_dir_path( __FILE__ ) . 'partials/credipost-public-display.php';
+		return ob_get_clean();
+	}
 }

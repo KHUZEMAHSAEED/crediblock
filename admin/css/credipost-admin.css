@@ -1,166 +1,260 @@
 /**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
+ * Credipost Admin Styles
+ * Strictly scoped under .credipost-admin-wrap
  */
 
-div[rezaid_tagname] {
-    display: none;
+.credipost-admin-wrap {
+	max-width: 1100px;
+	margin: 20px auto 40px 10px;
 }
 
-p[rezaid_tagname] {
-    display: none;
+/* Card Container */
+.credipost-admin-wrap .credipost-card {
+	background: #ffffff;
+	border: 1px solid #c3c4c7;
+	border-radius: 6px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	padding: 20px 24px;
+	margin-bottom: 20px;
 }
 
-h1[rezaid_tagname] {
-    display: none;
+.credipost-admin-wrap .credipost-input-card h2 {
+	margin-top: 0;
+	margin-bottom: 8px;
+	font-size: 1.3rem;
 }
 
-h2[rezaid_tagname] {
-    display: none;
+.credipost-admin-wrap .credipost-input-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+	margin-top: 14px;
 }
 
-h3[rezaid_tagname] {
-    display: none;
+.credipost-admin-wrap .credipost-input-field-wrap {
+	flex: 1 1 450px;
 }
 
-h4[rezaid_tagname] {
-    display: none;
+.credipost-admin-wrap .credipost-input-field-wrap input[type="url"] {
+	width: 100%;
+	padding: 8px 12px;
+	font-size: 14px;
+	border-radius: 4px;
+	border: 1px solid #8c8f94;
+	line-height: 1.5;
 }
 
-h5[rezaid_tagname] {
-    display: none;
+.credipost-admin-wrap .credipost-btn-group {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
 }
 
-h6[rezaid_tagname] {
-    display: none;
+/* Publish & Meta Bar */
+.credipost-admin-wrap .credipost-meta-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 16px;
+	margin-bottom: 20px;
 }
 
-span[rezaid_tagname] {
-    display: none;
+.credipost-admin-wrap .credipost-meta-grid .credipost-col-wide {
+	grid-column: 1 / -1;
 }
 
-ul[rezaid_tagname] {
-    display: none;
+.credipost-admin-wrap .credipost-meta-field label {
+	display: block;
+	margin-bottom: 6px;
+	font-size: 13px;
+	color: #1d2327;
 }
 
-li[rezaid_tagname] {
-    display: none;
+.credipost-admin-wrap .credipost-meta-field input,
+.credipost-admin-wrap .credipost-meta-field select {
+	width: 100%;
+	padding: 6px 10px;
+	border-radius: 4px;
+	border: 1px solid #8c8f94;
+	font-size: 14px;
+	background: #fff;
 }
 
+.credipost-admin-wrap .credipost-publish-actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding-top: 16px;
+	border-top: 1px solid #dcdcde;
+}
+
+/* Pruning Instruction Badge */
+.credipost-admin-wrap .credipost-instruction-badge {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: #e7f3fe;
+	border-left: 4px solid #2271b1;
+	padding: 10px 14px;
+	border-radius: 4px;
+	margin-bottom: 16px;
+	font-size: 13px;
+	color: #1d2327;
+}
+
+.credipost-admin-wrap .credipost-instruction-badge .dashicons {
+	color: #2271b1;
+	flex-shrink: 0;
+}
+
+/* Content Header */
+.credipost-admin-wrap .credipost-content-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 14px;
+	margin-bottom: 18px;
+	border-bottom: 1px solid #f0f0f1;
+}
+
+.credipost-admin-wrap .credipost-source-badge a {
+	word-break: break-all;
+	color: #2271b1;
+	text-decoration: none;
+}
+
+.credipost-admin-wrap .credipost-source-badge a:hover {
+	text-decoration: underline;
+}
+
+/* Content Sandbox & Pruning Blocks */
+.credipost-admin-wrap .credipost-rendered-content {
+	line-height: 1.7;
+	color: #2c3338;
+	font-size: 15px;
+}
+
+.credipost-admin-wrap .credipost-rendered-content img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 4px;
+	margin: 12px 0;
+}
+
+.credipost-admin-wrap .credipost-rendered-content iframe {
+	max-width: 100%;
+	border-radius: 6px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.credipost-admin-wrap .credipost-rendered-content blockquote {
+	margin: 16px 0;
+	padding: 12px 20px;
+	background: #f6f7f7;
+	border-left: 4px solid #787c82;
+	font-style: italic;
+}
+
+/* Pruning Hover States */
+.credipost-admin-wrap .credipost-block {
+	position: relative;
+	padding: 6px 12px;
+	margin: 8px 0;
+	border-radius: 4px;
+	border: 1px dashed transparent;
+	transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.credipost-admin-wrap .credipost-block:hover {
+	background-color: #fcf8e3;
+	border-color: #f0ad4e;
+}
+
+.credipost-admin-wrap .credipost-block .credipost-remove-btn {
+	display: none;
+	position: absolute;
+	top: -10px;
+	right: 6px;
+	background: #d63638;
+	color: #ffffff;
+	border: none;
+	border-radius: 12px;
+	width: 22px;
+	height: 22px;
+	line-height: 20px;
+	text-align: center;
+	font-size: 14px;
+	cursor: pointer;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+	padding: 0;
+}
+
+.credipost-admin-wrap .credipost-block:hover > .credipost-remove-btn {
+	display: block;
+}
+
+.credipost-admin-wrap .credipost-block .credipost-remove-btn:hover {
+	background: #b32d2e;
+	transform: scale(1.1);
+}
+
+/* Undo Toast */
+.credipost-admin-wrap .credipost-undo-bar {
+	position: sticky;
+	top: 40px;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #1d2327;
+	color: #ffffff;
+	padding: 8px 16px;
+	border-radius: 4px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	margin-bottom: 12px;
+}
+
+.credipost-admin-wrap .credipost-undo-bar button {
+	color: #72aee6;
+	cursor: pointer;
+	font-weight: 600;
+	text-decoration: underline;
+}
+
+.credipost-admin-wrap .credipost-undo-bar button:hover {
+	color: #ffffff;
+}
+
+/* Print Styles */
 @media print {
-    body * {
-        visibility: hidden;
-    }
-    #rendered_data,
-    #rendered_data * {
-        visibility: visible;
-    }
-    #rendered_data {
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-    #wpcontent,
-    #wpfooter {
-        padding: 0 !important;
-        width: 100% !important;
-        margin: 0 !important;
-    }
-    hr {
-        width: 96%;
-        color: black;
-        height: 1px;
-    }
-}
+	#adminmenumain,
+	#wpadminbar,
+	#wpfooter,
+	.credipost-input-card,
+	.credipost-publish-bar,
+	.credipost-instruction-badge,
+	.credipost-remove-btn,
+	.credipost-undo-bar {
+		display: none !important;
+	}
 
-.form-control {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
+	.credipost-admin-wrap {
+		margin: 0 !important;
+		padding: 0 !important;
+		max-width: 100% !important;
+	}
 
-.btn {
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
+	.credipost-content-card {
+		border: none !important;
+		box-shadow: none !important;
+		padding: 0 !important;
+	}
 
-.btn-dark {
-    color: #fff;
-    background-color: #343a40;
-    border-color: #343a40;
-}
-
-.btn-warning {
-    color: #212529;
-    background-color: #ffc107;
-    border-color: #ffc107;
-}
-
-.btn-info {
-    color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-}
-
-select {
-    word-wrap: normal;
-}
-
-.form-control-lg {
-    height: calc(1.5em + 1rem + 2px) !important;
-    padding: .5rem 1rem !important;
-    /* font-size: 1.25rem !important; */
-    line-height: 1.5 !important;
-    border-radius: .3rem !important;
-}
-
-.hr_hover:hover {
-    background-color: #fbf4bf !important;
-    color: black !important;
-}
-
-.icon_class {
-    display: none;
-}
-
-.hr_hover:hover .icon_class {
-    display: inline-block;
-    background-color: #ffc107;
-    margin-right: 0.5em;
-    cursor: pointer;
-}
-
-.btn-danger {
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-}
-
-.btn-success {
-    color: #fff;
-    background-color: #28a745;
-    border-color: #28a745;
+	.credipost-block {
+		border: none !important;
+		background: transparent !important;
+		padding: 0 !important;
+		margin: 8px 0 !important;
+	}
 }

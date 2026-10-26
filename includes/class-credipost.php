@@ -1,76 +1,46 @@
 <?php
-
 /**
- * The file that defines the core plugin class
+ * The core plugin class orchestrating hooks and dependencies.
  *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       http://rezaid.co.uk
- * @since      1.0.0
- *
- * @package    credipost
- * @subpackage credipost/includes
+ * @package    Credipost
+ * @subpackage Credipost/includes
  */
 
-/**
- * The core plugin class.
- *
- * This is used to define internationalization, admin-specific hooks, and
- * public-facing site hooks.
- *
- * Also maintains the unique identifier of this plugin as well as the current
- * version of the plugin.
- *
- * @since      1.0.0
- * @package    credipost
- * @subpackage credipost/includes
- * @author     Rezaid info@rezaid.co.uk
- */
+if ( ! defined( 'ABSPATH' ) && ! defined( 'WPINC' ) ) {
+	exit;
+}
+
 class Credipost {
 
 	/**
-	 * The loader that's responsible for maintaining and registering all hooks that power
-	 * the plugin.
+	 * Maintains and registers all hooks for the plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      Credipost_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var Credipost_Loader $loader
 	 */
 	protected $loader;
 
 	/**
-	 * The unique identifier of this plugin.
+	 * Unique identifier of this plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @var string $plugin_name
 	 */
 	protected $plugin_name;
 
 	/**
-	 * The current version of the plugin.
+	 * Current version of the plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @var string $version
 	 */
 	protected $version;
 
 	/**
-	 * Define the core functionality of the plugin.
-	 *
-	 * Set the plugin name and the plugin version that can be used throughout the plugin.
-	 * Load the dependencies, define the locale, and set the hooks for the admin area and
-	 * the public-facing side of the site.
-	 *
-	 * @since    1.0.0
+	 * Initialize the core plugin.
 	 */
 	public function __construct() {
-		if ( defined( 'PLUGIN_NAME_VERSION' ) ) {
-			$this->version = PLUGIN_NAME_VERSION;
+		if ( defined( 'CREDIPOST_VERSION' ) ) {
+			$this->version = CREDIPOST_VERSION;
 		} else {
-			$this->version = '1.0.0';
+			$this->version = '2.0.0';
 		}
 		$this->plugin_name = 'credipost';
 
@@ -78,141 +48,92 @@ class Credipost {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
-	 * Load the required dependencies for this plugin.
-	 *
-	 * Include the following files that make up the plugin:
-	 *
-	 * - Plugin_Name_Loader. Orchestrates the hooks of the plugin.
-	 * - Plugin_Name_i18n. Defines internationalization functionality.
-	 * - Plugin_Name_Admin. Defines all hooks for the admin area.
-	 * - Plugin_Name_Public. Defines all hooks for the public side of the site.
-	 *
-	 * Create an instance of the loader which will be used to register the hooks
-	 * with WordPress.
-	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * Load required dependencies.
 	 */
 	private function load_dependencies() {
-
-		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
-		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-credipost-loader.php';
-
-		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-credipost-i18n.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the admin area.
-		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-credipost-scraper.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-credipost-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-credipost-public.php';
 
 		$this->loader = new Credipost_Loader();
-
 	}
 
 	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the Plugin_Name_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
-	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * Define the locale for internationalization.
 	 */
 	private function set_locale() {
-
 		$plugin_i18n = new Credipost_i18n();
-
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
-	 * Register all of the hooks related to the admin area functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * Register all hooks related to the admin area.
 	 */
 	private function define_admin_hooks() {
-
 		$plugin_admin = new Credipost_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		// Menu & Assets
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_menu' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_assets' );
 
+		// AJAX Endpoints
+		$this->loader->add_action( 'wp_ajax_credipost_scrape_url', $plugin_admin, 'ajax_scrape_url' );
+		$this->loader->add_action( 'wp_ajax_credipost_get_embed', $plugin_admin, 'ajax_get_embed' );
+		$this->loader->add_action( 'wp_ajax_credipost_save_post', $plugin_admin, 'ajax_save_post' );
+
+		// Backward-compatible AJAX hooks
+		$this->loader->add_action( 'wp_ajax_scrape_data_php', $plugin_admin, 'ajax_scrape_url' );
+		$this->loader->add_action( 'wp_ajax_embed_code', $plugin_admin, 'ajax_get_embed' );
+		$this->loader->add_action( 'wp_ajax_save_as_post', $plugin_admin, 'ajax_save_post' );
 	}
 
 	/**
-	 * Register all of the hooks related to the public-facing functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * Register all hooks related to the public-facing side.
 	 */
 	private function define_public_hooks() {
-
 		$plugin_public = new Credipost_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
+		// Shortcodes
+		$this->loader->add_shortcode( 'CREDIPOST', $plugin_public, 'render_shortcode' );
+		$this->loader->add_shortcode( 'credipost', $plugin_public, 'render_shortcode' );
 	}
 
 	/**
-	 * Run the loader to execute all of the hooks with WordPress.
-	 *
-	 * @since    1.0.0
+	 * Run the loader to execute all hooks.
 	 */
 	public function run() {
 		$this->loader->run();
 	}
 
 	/**
-	 * The name of the plugin used to uniquely identify it within the context of
-	 * WordPress and to define internationalization functionality.
+	 * Get the plugin name.
 	 *
-	 * @since     1.0.0
-	 * @return    string    The name of the plugin.
+	 * @return string
 	 */
 	public function get_plugin_name() {
 		return $this->plugin_name;
 	}
 
 	/**
-	 * The reference to the class that orchestrates the hooks with the plugin.
+	 * Get the loader.
 	 *
-	 * @since     1.0.0
-	 * @return    Plugin_Name_Loader    Orchestrates the hooks of the plugin.
+	 * @return Credipost_Loader
 	 */
 	public function get_loader() {
 		return $this->loader;
 	}
 
 	/**
-	 * Retrieve the version number of the plugin.
+	 * Get the version number.
 	 *
-	 * @since     1.0.0
-	 * @return    string    The version number of the plugin.
+	 * @return string
 	 */
 	public function get_version() {
 		return $this->version;
 	}
-
 }
