@@ -1,6 +1,6 @@
 === Credipost ===
-Contributors: crediblock
-Donate link: https://crediblock.com/
+Contributors: khuzemahsaeed
+Donate link: https://portfolio-khuzemah-saeed.vercel.app/
 Tags: content curation, scraper, syndication, post creator, video embed
 Requires at least: 5.8
 Tested up to: 6.7

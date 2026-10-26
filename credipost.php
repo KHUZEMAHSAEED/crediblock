@@ -2,17 +2,17 @@
 /**
  * The plugin bootstrap file
  *
- * @link              https://crediblock.com/
+ * @link              https://portfolio-khuzemah-saeed.vercel.app/
  * @since             1.0.0
  * @package           Credipost
  *
  * @wordpress-plugin
  * Plugin Name:       Credipost
- * Plugin URI:        https://crediblock.com/
+ * Plugin URI:        https://portfolio-khuzemah-saeed.vercel.app/
  * Description:       Curate, scrape, prune, and syndicate web articles and video embeds safely to WordPress posts and multisite networks.
  * Version:           2.0.0
- * Author:            Crediblock
- * Author URI:        https://crediblock.com/
+ * Author:            Khuzemah Saeed
+ * Author URI:        https://portfolio-khuzemah-saeed.vercel.app/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       credipost

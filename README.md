@@ -2,8 +2,8 @@
 
 [![WordPress](https://img.shields.io/badge/WordPress-5.8%2B-blue.svg)](https://wordpress.org)
 [![PHP](https://img.shields.io/badge/PHP-7.4%20|%208.0%20|%208.1%20|%208.2%20|%208.3-8892BF.svg)](https://www.php.net)
-[![License: GPL v2+](https://img.shields.io/badge/License-GPL%20v2%2B-green.svg)](http://www.gnu.org/licenses/gpl-2.0.txt)
-[![Version](https://img.shields.io/badge/Version-2.0.0-orange.svg)](https://crediblock.com/)
+[![Version](https://img.shields.io/badge/Version-2.0.0-orange.svg)](https://portfolio-khuzemah-saeed.vercel.app/)
+[![Author](https://img.shields.io/badge/Author-Khuzemah%20Saeed-blueviolet.svg)](https://portfolio-khuzemah-saeed.vercel.app/)
 
 **Credipost** is a secure, high-performance content curation and syndication plugin for WordPress. It allows site editors to fetch external web articles or video embeds, interactively prune unwanted blocks (with undo support), configure metadata and taxonomy terms, and publish directly to the local site or across a WordPress Multisite network.
 
@@ -118,6 +118,13 @@ The plugin is fully internationalized. To translate Credipost into your language
 1. Open [`languages/credipost.pot`](languages/credipost.pot) in **Poedit** or your preferred translation tool.
 2. Create your `.po` and `.mo` files (e.g. `credipost-es_ES.po`).
 3. Save the compiled translation files in the `/languages/` directory.
+
+---
+
+## 👨‍💻 Author & Maintainer
+
+Developed and maintained by **Khuzemah Saeed**.
+- **Portfolio**: [portfolio-khuzemah-saeed.vercel.app](https://portfolio-khuzemah-saeed.vercel.app/)
 
 ---
 

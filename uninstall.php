@@ -2,7 +2,8 @@
 /**
  * Fired when the plugin is uninstalled.
  *
- * @link       https://crediblock.com/
+ * @link       https://portfolio-khuzemah-saeed.vercel.app/
+ * @author     Khuzemah Saeed
  * @since      1.0.0
  * @package    Credipost
  */

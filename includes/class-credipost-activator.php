@@ -3,7 +3,7 @@
 /**
  * Fired during plugin activation
  *
- * @link       http://rezaid.co.uk
+ * @link       https://portfolio-khuzemah-saeed.vercel.app/
  * @since      1.0.0
  *
  * @package    credipost
@@ -18,7 +18,7 @@
  * @since      1.0.0
  * @package    credipost
  * @subpackage credipost/includes
- * @author     Rezaid info@rezaid.co.uk
+ * @author     Khuzemah Saeed
  */
 class Credipost_Activator {
 

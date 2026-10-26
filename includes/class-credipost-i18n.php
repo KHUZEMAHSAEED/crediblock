@@ -6,7 +6,7 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       http://rezaid.co.uk
+ * @link       https://portfolio-khuzemah-saeed.vercel.app/
  * @since      1.0.0
  *
  * @package    credipost
@@ -22,7 +22,7 @@
  * @since      1.0.0
  * @package    credipost
  * @subpackage credipost/includes
- * @author     Rezaid info@rezaid.co.uk
+ * @author     Khuzemah Saeed
  */
 class Credipost_i18n {
 
