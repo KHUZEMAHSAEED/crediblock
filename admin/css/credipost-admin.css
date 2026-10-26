@@ -1,0 +1,166 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+div[rezaid_tagname] {
+    display: none;
+}
+
+p[rezaid_tagname] {
+    display: none;
+}
+
+h1[rezaid_tagname] {
+    display: none;
+}
+
+h2[rezaid_tagname] {
+    display: none;
+}
+
+h3[rezaid_tagname] {
+    display: none;
+}
+
+h4[rezaid_tagname] {
+    display: none;
+}
+
+h5[rezaid_tagname] {
+    display: none;
+}
+
+h6[rezaid_tagname] {
+    display: none;
+}
+
+span[rezaid_tagname] {
+    display: none;
+}
+
+ul[rezaid_tagname] {
+    display: none;
+}
+
+li[rezaid_tagname] {
+    display: none;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #rendered_data,
+    #rendered_data * {
+        visibility: visible;
+    }
+    #rendered_data {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    #wpcontent,
+    #wpfooter {
+        padding: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    hr {
+        width: 96%;
+        color: black;
+        height: 1px;
+    }
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn-dark {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+.btn-warning {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+select {
+    word-wrap: normal;
+}
+
+.form-control-lg {
+    height: calc(1.5em + 1rem + 2px) !important;
+    padding: .5rem 1rem !important;
+    /* font-size: 1.25rem !important; */
+    line-height: 1.5 !important;
+    border-radius: .3rem !important;
+}
+
+.hr_hover:hover {
+    background-color: #fbf4bf !important;
+    color: black !important;
+}
+
+.icon_class {
+    display: none;
+}
+
+.hr_hover:hover .icon_class {
+    display: inline-block;
+    background-color: #ffc107;
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
